@@ -44,6 +44,24 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+userSchema.virtual('formulas', {
+    ref: 'Formula',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+userSchema.virtual('variables', {
+    ref: 'Variable',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+userSchema.virtual('packs', {
+    ref: 'Pack',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()

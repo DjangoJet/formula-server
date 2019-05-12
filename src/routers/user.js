@@ -85,4 +85,31 @@ router.delete('/users/me', auth, async (req, res) => {
     }
 })
 
+router.get('/users/owned/variables', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate('variables')
+        res.send(user.variables)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.get('/users/owned/formulas', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate('formulas')
+        res.send(user.formulas)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.get('/users/owned/packs', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate('packs')
+        res.send(user.packs)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router
